@@ -1,23 +1,11 @@
 const removeFromArray = function(array, ...values) {
-    const toRemove = new Array(array.length);
-    for (let i = 0; i < toRemove.length; i++) {
-        toRemove[i] = false;
-    }
-
-    for (const value of values) {
-        for (let i = 0; i < array.length; i++) {
-            if (array[i] === value) {
-                toRemove[i] = true;
-            }
-        }
-    }
-
+    const valuesToRemove = new Set(values);
     const arrayWithElementsRemoved = [];
-    for (let i = 0; i < array.length; i++) {
-        if (!toRemove[i]) {
-            arrayWithElementsRemoved.push(array[i]);
+    array.forEach( (element) => {
+        if (!valuesToRemove.has(element)) {
+            arrayWithElementsRemoved.push(element);
         }
-    }
+    });
 
     return arrayWithElementsRemoved;
 };
